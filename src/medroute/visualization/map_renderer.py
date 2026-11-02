@@ -40,17 +40,13 @@ class MapRenderer:
             self.origin_lon + x * self._deg_per_unit,
         )
 
-    def render(
+    def build_map(
         self,
         depot: Depot,
         plan: RoutePlan,
-        output_path: str | Path,
         title: str = "Rotas Otimizadas — Distribuição de Medicamentos",
-    ) -> Path:
-        """Renderiza o plano de rotas e salva como arquivo HTML."""
-        output_path = Path(output_path)
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-
+    ) -> folium.Map:
+        """Constrói o folium.Map do plano (exibível inline em notebooks)."""
         center = self.to_geo(depot.x, depot.y)
         fmap = folium.Map(location=center, zoom_start=11, tiles=None)
         folium.TileLayer(
@@ -112,5 +108,17 @@ class MapRenderer:
         fmap.get_root().html.add_child(
             folium.Element(f"<h3 style='text-align:center'>{title}</h3>")
         )
-        fmap.save(str(output_path))
+        return fmap
+
+    def render(
+        self,
+        depot: Depot,
+        plan: RoutePlan,
+        output_path: str | Path,
+        title: str = "Rotas Otimizadas — Distribuição de Medicamentos",
+    ) -> Path:
+        """Renderiza o plano de rotas e salva como arquivo HTML."""
+        output_path = Path(output_path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        self.build_map(depot, plan, title).save(str(output_path))
         return output_path

@@ -12,6 +12,8 @@ numpy = ">=2.0,<3"
 
 [dev-packages]
 pytest = ">=8,<9"
+notebook = "*"
+ipykernel = "*"
 
 [requires]
 python_version = "3.14"

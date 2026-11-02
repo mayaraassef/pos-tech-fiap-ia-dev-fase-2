@@ -51,6 +51,7 @@ def test_architecture_doc_has_diagrams() -> None:
 def test_demo_and_benchmark_scripts_exist() -> None:
     assert _exists_nonempty("src/medroute/cli.py")
     assert _exists_nonempty("scripts/benchmark.py")
+    assert _exists_nonempty("notebooks/demo_medroute.ipynb")
 
 def test_env_not_committable() -> None:
     gitignore = (PROJECT_ROOT / ".gitignore").read_text(encoding="utf-8")

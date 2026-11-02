@@ -26,6 +26,7 @@ instruções para motoristas e Q&A em linguagem natural via **Google Gemini**.
 │   ├── data/sample_scenario.py
 │   └── cli.py                 # ponto de entrada
 ├── scripts/benchmark.py       # GA vs. guloso vs. aleatório vs. TSP ingênuo
+├── notebooks/demo_medroute.ipynb  # notebook de demonstração end-to-end
 ├── tests/                     # suíte pytest (50 testes)
 ├── docs/architecture.md       # diagramas da solução
 ├── docs/relatorio_tecnico.md  # relatório técnico completo
@@ -63,6 +64,9 @@ pipenv run python -m medroute.cli --ask "Qual veiculo faz mais entregas criticas
 
 # comparativo de desempenho (GA vs. baselines)
 pipenv run python scripts/benchmark.py
+
+# notebook de demonstração end-to-end
+pipenv run jupyter notebook notebooks/demo_medroute.ipynb
 ```
 
 Artefatos gerados em `output/`:
