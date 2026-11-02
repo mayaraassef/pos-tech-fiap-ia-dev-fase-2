@@ -52,7 +52,16 @@ class MapRenderer:
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
         center = self.to_geo(depot.x, depot.y)
-        fmap = folium.Map(location=center, zoom_start=11, tiles="OpenStreetMap")
+        fmap = folium.Map(location=center, zoom_start=11, tiles=None)
+        folium.TileLayer(
+            tiles="https://server.arcgisonline.com/ArcGIS/rest/services/"
+            "World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+            attr="Esri — Sources: Esri, HERE, Garmin, USGS",
+            name="Esri World Street Map",
+        ).add_to(fmap)
+        folium.TileLayer(
+            "OpenStreetMap", name="OpenStreetMap", show=False
+        ).add_to(fmap)
 
         folium.Marker(
             location=self.to_geo(depot.x, depot.y),
